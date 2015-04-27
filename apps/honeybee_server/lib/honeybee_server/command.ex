@@ -33,6 +33,7 @@ defmodule HoneyBeeServer.Command do
   def parse(line) do
     case String.split(line) do
       ["CREATE", bucket]          -> {:ok, {:create, bucket}}
+      ["LIST", bucket]            -> {:ok, {:list, bucket}}
       ["GET", bucket, key]        -> {:ok, {:get, bucket, key}}
       ["SET", bucket, key, value] -> {:ok, {:set, bucket, key, value}}
       ["DELETE", bucket, key]     -> {:ok, {:delete, bucket, key}}
@@ -48,6 +49,13 @@ defmodule HoneyBeeServer.Command do
   def run({:create, bucket}) do
     HoneyBee.Registry.create(HoneyBee.Registry, bucket)
     {:ok, "OK\r\n"}
+  end
+
+  def run({:list, bucket}) do
+    lookup bucket, fn pid ->
+      value = HoneyBee.Bucket.list(pid)
+      {:ok, "#{value}\r\nOK\r\n"}
+    end
   end
 
   def run({:get, bucket, key}) do

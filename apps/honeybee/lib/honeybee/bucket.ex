@@ -5,6 +5,10 @@ defmodule HoneyBee.Bucket do
     Agent.start_link(fn -> HashDict.new end)
   end
 
+  def list(bucket) do
+    Agent.get(bucket, &inspect(&1, raw: true))
+  end
+
   def get(bucket, key) do
     Agent.get(bucket, &HashDict.get(&1, key))
   end
@@ -18,6 +22,5 @@ defmodule HoneyBee.Bucket do
       HashDict.pop(dict, key)
     end)
   end
-
 
 end
