@@ -1,2 +1,4 @@
-%{"pipe": {:git, "git://github.com/batate/elixir-pipes.git", "fbbe0997f761b02fe5b6e809b5ee4e3fba9c819d", []},
-  "plug": {:hex, :plug, "0.5.3"}}
+%{"apex": {:hex, :apex, "0.3.2"},
+  "pipe": {:git, "git://github.com/batate/elixir-pipes.git", "fbbe0997f761b02fe5b6e809b5ee4e3fba9c819d", []},
+  "plug": {:hex, :plug, "0.5.3"},
+  "timex": {:hex, :timex, "0.13.4"}}
